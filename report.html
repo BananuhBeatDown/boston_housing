@@ -11890,23 +11890,23 @@ C:\Users\Matt Green\Anaconda2\lib\site-packages\sklearn\learning_curve.py:23: De
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="k">print</span> <span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -11933,7 +11933,7 @@ Minimum price: $105,000.00
 Maximum price: $1,024,800.00
 Mean price: $454,342.94
 Median price $438,900.00
-Standard deviation of prices: $165,340.28
+Standard deviation of prices: $165,171.13
 </pre>
 </div>
 </div>
@@ -13768,7 +13768,7 @@ MaZNscRnjDGmTfn/Z105gXYDieAAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> When the model is trained with max_depth=1 it is suffering from high variance due to the fact that more information will radically change the model as the depth increases. This can be observed in the training and validation scores are both being mcuh lower than the measurements taken at increasing depths. As the max_depth increases to 10 the model begins to suffer high bias since the training scores continue to rise, but the validation score begins to drop after max_depth 4. This happens due to overfitting the model with relationships that may not be present in the data, but is incorrectly classified as such.</p>
+<p><strong>Answer: </strong> When the model is trained with max_depth=1 it is suffering from high bias due to the fact that the training and validation score will drastically increase as the depth increases, increasing model complexity. This can be observed in the training and validation scores are both being much lower at <code>max_depth=1</code> than the measurements taken at increasing depths. As the max_depth increases to 10 the model begins to suffer high variance since the training scores continue to rise, but the validation score begins to drop after max_depth 4. This happens as a result of overly complex model that is too 'sensitive' to the training data and unable to generalize its predictions to the larger population.</p>
 
 </div>
 </div>
@@ -13840,7 +13840,9 @@ MaZNscRnjDGmTfn/Z105gXYDieAAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> It splits the dataset into a testing and training set, alternating through the data using a small percentage as a testing set and the rest as a training set in order to ensure all the data is used as testing and training data, taking a mean of the predicted scores as the result. Without a testing set, the dataset will run into overfitting problems and will likely have a substantial decrease in precision and accuracy when making predictions on outside data.</p>
+<p><strong>Answer: </strong> It splits the dataset into <em>K</em> equal sized bins (these bins are called folds, and are determined by the parameters of the function), and runs <em>K</em> separate experiments, each time using a single, different, non-repeating K bin as the testing set with all remaining bins used as the training set. 
+The test results are then averaged from the <em>K</em> different experiments, leaving the user with a single number.</p>
+<p>Without a testing set, the dataset will run into overfitting problems and will likely have a substantial decrease in precision and accuracy when making predictions on outside data.</p>
 
 </div>
 </div>
